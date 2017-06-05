@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>WhiteBoard | Real Time Code Collaboration IDE</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="../public/css/bootstrap.css">
+	<script src="../public/js/jquery.js"></script>
+	<script src="../public/js/bootstrap.js"></script>
+	<script src="../public/src/ace.js" type="text/javascript" charset="utf-8"></script>
+	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+
+	<script src="https://use.fontawesome.com/795dd48394.js"></script>
+
+	<style type="text/css">
+		.x { 
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+    .left-icons{
+    	display: block;
+    	margin:auto;
+    	width: 45%;
+    	padding-top: 30%;
+    	padding-bottom: 8%;
+    }
+    .logo{
+    	padding-bottom: 0%;
+    }
+    li{
+    	color: white;
+    	text-align: center;
+    	font-family: Josefin Sans;
+    	font-size: 16px;
+    }
+    i{
+    	font-family: Josefin Sans;
+    }
+    .footerbtn{
+    	padding: 8px 10px;
+    }
+	</style>
+</head>
+<body>
+	<div class="row main_div" style="background-color: orange; height: 90vh">
+
+
+		<div class="col-md-9 col-sm-12" style="background-color: red; height: 90vh">
+			<div class="row">
+				<div class="col-md-2 col-sm-2" style="background-color: rgba(0,0,0,1);height: 90vh">
+					<ul style="list-style: none;margin-left:-20px;">
+						<li><img class="img-responsive left-icons logo" src="../public/img/logo.png"></li>
+						<li>Code</li>
+						<li><img class="img-responsive left-icons" src="../public/img/user.png"></li>
+						<li>Invite</li>
+						<li><img class="img-responsive left-icons" src="../public/img/contacts.png"></li>
+						<li>Load Snippet</li>
+						<li><img class="img-responsive left-icons" src="../public/img/repeat.png"></li>
+						<li>Playback</li>
+					</ul>
+					
+				</div>
+				<div id="editor" class="col-md-10 col-sm-10" style="height: 90vh"> 
+				
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-3 hidden-sm" style="background-color: rgba(0,0,0,0.9); height: 90vh">
+
+		</div>
+
+
+	</div>
+
+
+	<div class="row" style="background-color: rgba(0,0,0,1); height: 8vh">
+		<div class="col-md-9">
+			<div class="row">
+				<div class="col-md-2">
+				</div>
+				<div class = "col-md-10">
+					<ul class="list-inline">
+					<li>
+
+					<div class="dropup" style="margin-top:0.5%">
+					    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" style="font-size: 16px;"><span style="font-family: Josefin Sans;font-size: 16px;">Javascript</span>
+					    <span class="caret"></span></button>
+					    <ul class="dropdown-menu">
+					      <li><a href="#">C++ 4.8</a></li>
+					      <li><a href="#">C</a></li>
+					      <li><a href="#">Python 2</a></li>
+					      <li><a href="#">Ruby</a></li>
+					    </ul>
+					</div>
+					</li>
+					<li>
+						<a class="btn btn-default btn-sm footerbtn" href="#">
+					    <i class="fa fa-play" aria-hidden="true""><span style="font-family: Josefin Sans;font-size: 16px;">Run Code</span></i>
+						</a>
+
+					</li>
+					<li>
+						<a class="btn btn-default btn-sm footerbtn" href="#">
+							<i class="fa fa-toggle-on" aria-hidden="true">Switch Dark Mode</i>
+						</a>
+					</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class = "col-md-3">
+		</div>
+	</div>
+
+	<script>
+	    var editor = ace.edit("editor");
+	    editor.setTheme("ace/theme/monokai");
+	    editor.getSession().setMode("ace/mode/javascript");
+	    document.getElementById('editor').style.fontSize='16px';
+	    editor.getSession().setUseWrapMode(true);
+	    editor.setShowPrintMargin(false);	//setting the print margin visibility
+	</script>
+</body>
+</html>
