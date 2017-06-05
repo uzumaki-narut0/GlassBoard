@@ -122,6 +122,12 @@
 	    document.getElementById('editor').style.fontSize='16px';
 	    editor.getSession().setUseWrapMode(true);
 	    editor.setShowPrintMargin(false);	//setting the print margin visibility
+
+	    editor.getSession().on('change', function(e) {
+		    // e.type, etc
+		    console.log(editor.getValue());
+		});
+
 	</script>
 </body>
 </html>
