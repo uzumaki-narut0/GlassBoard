@@ -107,8 +107,11 @@
 		    var msg = {
 		    	id : room,
 		    	user : user,
-		    	value : editor.getValue()
+		    	value : editor.getValue(),
+		    	cursor_pos : editor.getCursorPosition(),
 		    };
+		    var curr_pos = editor.getCursorPosition();
+		    console.log(curr_pos);
 		    // console.log(e);
 		    // console.log(e.type);
 		    socket.emit('document-update',msg);
@@ -122,7 +125,7 @@
 				console.log('in doc client');
 			//	var current_pos = editor.selection.getCursor();
 				editor.setValue(msg.new_val.value);
-			//	editor.
+				editor.moveCursorToPosition(msg.new_val.pos);
 			}
 		});
 

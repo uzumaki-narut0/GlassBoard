@@ -43,7 +43,7 @@ r.connect({host:'localhost',port:28015}, function(err, conn){
     });
 
     socket.on('document-update', function(msg){
-      r.table('edit').insert({id:msg.id, value:msg.value, user:msg.user}, {conflict : 'update'}).run(conn, function(err,res){
+      r.table('edit').insert({id:msg.id, value:msg.value, user:msg.user, pos:msg.cursor_pos}, {conflict : 'update'}).run(conn, function(err,res){
         if(err)
           throw err;
 
