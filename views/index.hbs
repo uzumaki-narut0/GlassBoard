@@ -73,8 +73,8 @@
 	<script src="/socket.io/socket.io.js"></script>
 	<script type="text/javascript">
 		var socket = io();
-		var uniquekey = Math.random().toString(36).slice(2);
-		socket.emit('create',uniquekey);
+		var uniquekey = "{{id}}";
+	//	socket.emit('create',uniquekey);
 		socket.on('updatecode',function(code){
 			editor.setValue(code);
 		});
@@ -90,7 +90,12 @@
 	    editor.getSession().on('change', function(e) {
 		    // e.type, etc
 		    console.log(editor.getValue());
-		    socket.emit('sendcode',editor.getValue(),uniquekey);
+		    var msg = {
+		    	id : uniquekey,
+		    	user : user,
+		    	value : editor.getValue()
+		    };
+		    socket.emit('document-update',msg);
 		});
 
 	</script>
