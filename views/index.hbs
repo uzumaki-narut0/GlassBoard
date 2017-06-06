@@ -89,7 +89,7 @@
 	    editor.setShowPrintMargin(false);	//setting the print margin visibility
 	    //editor.setValue('hello');
 
-	    editor.getSession().on('change', function(e) {
+	    /*editor.getSession().on('change', function(e) {
 		    // e.type, etc
 		    console.log(editor.getValue());
 		    var msg = {
@@ -97,15 +97,30 @@
 		    	user : user,
 		    	value : editor.getValue()
 		    };
+		    console.log(e);
+		    console.log(e.type);
+		    //socket.emit('document-update',msg);
+		});*/
+		$('.ace_text-input').on('keyup', function(){
+			console.log('hola');
+			console.log(editor.getValue());
+		    var msg = {
+		    	id : room,
+		    	user : user,
+		    	value : editor.getValue()
+		    };
+		    // console.log(e);
+		    // console.log(e.type);
 		    socket.emit('document-update',msg);
 		});
 
 		socket.on('doc', function(msg){
 			console.log('room: ' + room + " " + "user: " + user);
+			console.log('tableroom: ' + msg.new_val.id + " " + "tableuser: " + msg.new_val.user);
 			
 			if(msg.new_val.id === room && msg.new_val.user != user){
 				console.log('in doc client');
-				var current_pos = editor.selection.getCursor();
+			//	var current_pos = editor.selection.getCursor();
 				editor.setValue(msg.new_val.value);
 			//	editor.
 			}
