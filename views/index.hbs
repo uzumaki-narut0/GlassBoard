@@ -4,10 +4,10 @@
 
 		<div class="col-md-9 col-sm-12" style="background-color: red; height: 90vh">
 			<div class="row">
-				<div class="col-md-2 col-sm-2" style="background-color: rgba(0,0,0,1);height: 90vh">
-					<ul style="list-style: none;margin-left:-20px;">
-						<li><img class="img-responsive left-icons logo" src="/img/logo.png"></li>
-						<li>Code</li>
+				<div class="col-md-2 col-sm-2" style="background-color: rgba(0,0,0,1);padding:0;height: 90vh">
+					<ul style="list-style: none;">
+						<li style="background-color: #336a9a;width: 100%;"><img class="img-responsive left-icons logo" src="/img/logo.png"></li>
+						<li style="background-color: #336a9a">Code</li>
 						<li><img class="img-responsive left-icons" src="/img/user.png"></li>
 						<li>Invite</li>
 						<li><img class="img-responsive left-icons" src="/img/contacts.png"></li>
@@ -73,7 +73,8 @@
 	<script src="/socket.io/socket.io.js"></script>
 	<script type="text/javascript">
 		var socket = io();
-		var uniquekey = "{{id}}";
+		var room = "{{id}}";
+		var user = "{{user}}";
 	//	socket.emit('create',uniquekey);
 		socket.on('updatecode',function(code){
 			editor.setValue(code);
@@ -86,16 +87,28 @@
 	    document.getElementById('editor').style.fontSize='16px';
 	    editor.getSession().setUseWrapMode(true);
 	    editor.setShowPrintMargin(false);	//setting the print margin visibility
+	    //editor.setValue('hello');
 
 	    editor.getSession().on('change', function(e) {
 		    // e.type, etc
 		    console.log(editor.getValue());
 		    var msg = {
-		    	id : uniquekey,
+		    	id : room,
 		    	user : user,
 		    	value : editor.getValue()
 		    };
 		    socket.emit('document-update',msg);
+		});
+
+		socket.on('doc', function(msg){
+			console.log('room: ' + room + " " + "user: " + user);
+			
+			if(msg.new_val.id === room && msg.new_val.user != user){
+				console.log('in doc client');
+				var current_pos = editor.selection.getCursor();
+				editor.setValue(msg.new_val.value);
+			//	editor.
+			}
 		});
 
 	</script>
