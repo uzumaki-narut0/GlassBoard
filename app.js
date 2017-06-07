@@ -7,7 +7,7 @@ var io = require('socket.io')(http);	//socket server which integrates with (moun
 var hbs = require('express-handlebars');
 
 app.use(express.static(__dirname + '/public'));
-var portnumber = process.env.PORT || 8080;
+var portnumber = process.env.PORT || 3000;
 
 app.engine('hbs',hbs({extname: 'hbs', defaultLayout: 'layout', layoutsDir: __dirname+'/views'}));//first argument is engine name which can be anything
 app.set('views', path.join(__dirname, 'views'));
@@ -92,6 +92,6 @@ app.get('/:id/:user',function(req,res){
 
 
 
-http.listen(portnumber,process.env.IP, function(){
-  console.log('listening on *:' + '172.16.170.18' + ":" + portnumber);
+http.listen(portnumber, function(){
+  console.log('listening on:' + portnumber);
 });

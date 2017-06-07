@@ -1,0 +1,45 @@
+.left-icons{
+        display: block;
+        margin:auto;
+        width: 35%;
+        padding-top: 30%;
+        padding-bottom: 8%;
+    }
+.logo{
+    padding-bottom: 0%;
+}
+li{
+    color: white;
+    text-align: center;
+    font-family: Josefin Sans;
+    font-size: 16px;
+}
+i{
+    font-family: Josefin Sans;
+}
+ul{
+    padding-left: 0;
+    margin-bottom: 0;
+}
+.btn{
+    background-color: rgba(0,0,0,0.8);
+    color: white;
+    border-color:#336a9a; 
+    padding: 6px 10px;
+    margin-top: 5px;
+}
+.btn:hover, .btn:active, .btn:focus{
+    background-color: rgba(0,0,0,0.8);
+    color: #336a9a;
+}
+#leftsidebar{
+    background-color: rgba(0,0,0,1);
+    padding:0;
+    height: 90vh;
+    overflow: hidden;
+}
+#bottombar{
+    background-color: rgba(0,0,0,1);
+    height: 8vh;
+    overflow: hidden;
+}

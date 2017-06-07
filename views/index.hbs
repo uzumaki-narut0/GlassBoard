@@ -1,132 +1,154 @@
 
-	<div class="row main_div" style="background-color: orange; height: 90vh">
-
-
-		<div class="col-md-9 col-sm-12" style="background-color: red; height: 90vh">
-			<div class="row">
-				<div class="col-md-2 col-sm-2" style="background-color: rgba(0,0,0,1);padding:0;height: 90vh">
-					<ul style="list-style: none;">
-						<li style="background-color: #336a9a;width: 100%;"><img class="img-responsive left-icons logo" src="/img/logo.png"></li>
-						<li style="background-color: #336a9a">Code</li>
-						<li><img class="img-responsive left-icons" src="/img/user.png"></li>
-						<li>Invite</li>
-						<li><img class="img-responsive left-icons" src="/img/contacts.png"></li>
-						<li>Load Snippet</li>
-						<li><img class="img-responsive left-icons" src="/img/repeat.png"></li>
-						<li>Playback</li>
-					</ul>
-					
-				</div>
-				<div id="editor" class="col-md-10 col-sm-10" style="height: 90vh"> 
-				
-				</div>
-			</div>
-		</div>
-
-		<div class="col-md-3 hidden-sm" style="background-color: rgba(0,0,0,0.9); height: 90vh">
-
-		</div>
-
-
-	</div>
-
-
-	<div class="row" style="background-color: rgba(0,0,0,1); height: 8vh">
-		<div class="col-md-9">
-			<div class="row">
-				<div class="col-md-2">
-				</div>
-				<div class = "col-md-10">
-					<ul class="list-inline">
-					<li>
-
-					<div class="dropup" style="margin-top:0.5%">
-					    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" style="font-size: 16px;"><span style="font-family: Josefin Sans;font-size: 16px;">Javascript</span>
-					    <span class="caret"></span></button>
-					    <ul class="dropdown-menu">
-					      <li><a href="#">C++ 4.8</a></li>
-					      <li><a href="#">C</a></li>
-					      <li><a href="#">Python 2</a></li>
-					      <li><a href="#">Ruby</a></li>
-					    </ul>
-					</div>
-					</li>
-					<li>
-						<a class="btn btn-default btn-sm footerbtn" href="#">
-					    <i class="fa fa-play" aria-hidden="true""><span style="font-family: Josefin Sans;font-size: 16px;">Run Code</span></i>
-						</a>
-
-					</li>
-					<li>
-						<a class="btn btn-default btn-sm footerbtn" href="#">
-							<i class="fa fa-toggle-on" aria-hidden="true">Switch Dark Mode</i>
+<div class="row main_div" style="background-color: orange; height: 90vh">
+	<div class="col-md-9 col-sm-12" style="background-color: red; height: 90vh">
+		<div class="row">
+			<div id="leftsidebar" class="col-md-2 col-sm-2">
+				<ul style="list-style: none;">
+					<li style="background-color: #336a9a;width: 100%;">
+						<a href = "#">
+							<img class="img-responsive left-icons logo" src="/img/logo.png">
 						</a>
 					</li>
-					</ul>
-				</div>
+					<li style="background-color: #336a9a">Code</li>
+					<li>
+						<a href="#">
+							<img class="img-responsive left-icons" src="/img/user.png">
+						</a>
+					</li>
+					<li>Invite</li>
+					<li>
+						<a href="#">
+							<img class="img-responsive left-icons" src="/img/contacts.png">
+						</a>
+					</li>
+					<li>Load Snippet</li>
+					<li>
+						<a href="#">
+							<img class="img-responsive left-icons" src="/img/repeat.png">
+						</a>
+					</li>
+					<li>Playback</li>
+				</ul>		
 			</div>
-		</div>
-		<div class = "col-md-3">
-		</div>
-	</div>
-
-	<script src="/socket.io/socket.io.js"></script>
-	<script type="text/javascript">
-		var socket = io();
-		var room = "{{id}}";
-		var user = "{{user}}";
-	//	socket.emit('create',uniquekey);
-		socket.on('updatecode',function(code){
-			editor.setValue(code);
-		});
-	</script>
-	<script>
-	    var editor = ace.edit("editor");
-	    editor.setTheme("ace/theme/monokai");
-	    editor.getSession().setMode("ace/mode/javascript");
-	    document.getElementById('editor').style.fontSize='16px';
-	    editor.getSession().setUseWrapMode(true);
-	    editor.setShowPrintMargin(false);	//setting the print margin visibility
-	    //editor.setValue('hello');
-
-	    /*editor.getSession().on('change', function(e) {
-		    // e.type, etc
-		    console.log(editor.getValue());
-		    var msg = {
-		    	id : room,
-		    	user : user,
-		    	value : editor.getValue()
-		    };
-		    console.log(e);
-		    console.log(e.type);
-		    //socket.emit('document-update',msg);
-		});*/
-		$('.ace_text-input').on('keyup', function(){
-			console.log('hola');
-			console.log(editor.getValue());
-		    var msg = {
-		    	id : room,
-		    	user : user,
-		    	value : editor.getValue(),
-		    	cursor_pos : editor.getCursorPosition(),
-		    };
-		    var curr_pos = editor.getCursorPosition();
-		    console.log(curr_pos);
-		    // console.log(e);
-		    // console.log(e.type);
-		    socket.emit('document-update',msg);
-		});
-
-		socket.on('doc', function(msg){
-			console.log('room: ' + room + " " + "user: " + user);
-			console.log('tableroom: ' + msg.new_val.id + " " + "tableuser: " + msg.new_val.user);
+			<div id="editor" class="col-md-10 col-sm-10" style="height: 90vh"> 
 			
-			if(msg.new_val.id === room && msg.new_val.user != user){
-				console.log('in doc client');
-			//	var current_pos = editor.selection.getCursor();
-				editor.setValue(msg.new_val.value);
-				editor.moveCursorToPosition(msg.new_val.pos);
-			}
-		});
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3 hidden-sm" style="background-color: rgba(0,0,0,0.9); height: 90vh">
+	</div>
+</div>
+<div id="bottombar" class="row">
+	<div class="col-md-9">
+		<div class="row">
+			<div class="col-md-2">
+			</div>
+			<div class = "col-md-10">
+				<ul class="list-inline">
+				<li>
 
-	</script>
+				<div class="dropup" style="margin-top:0.5%">
+				    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" style="font-size: 16px;"><span style="font-family: Josefin Sans;font-size: 16px;">Javascript</span>
+				    <span class="caret"></span></button>
+				    <ul class="dropdown-menu">
+				      <li><a href="#">C++ 4.8</a></li>
+				      <li><a href="#">C</a></li>
+				      <li><a href="#">Python 2</a></li>
+				      <li><a href="#">Ruby</a></li>
+				    </ul>
+				</div>
+				</li>
+				<li>
+					<a class="btn btn-default btn-sm footerbtn" href="#">
+				    <i class="fa fa-play" aria-hidden="true""><span style="font-family: Josefin Sans;font-size: 16px;">&nbsp;Run Code</span></i>
+					</a>
+
+				</li>
+				<li>
+					<a class="btn btn-default btn-sm footerbtn switchdarkmode" href="#">
+						<i class="fa fa-toggle-on" aria-hidden="true"><span style="font-family: Josefin Sans;font-size: 16px;">&nbsp;Switch Editor Mode</span></i>
+					</a>
+				</li>
+				<li>
+					<a class="btn btn-default btn-sm footerbtn increasefont" href="#">
+						<i class="fa fa-search-plus" aria-hidden="true"><span style="font-family: Josefin Sans;font-size: 16px;">&nbsp;Font +</span></i>
+					</a>
+				</li>
+				<li>
+					<a class="btn btn-default btn-sm footerbtn decreasefont" href="#">
+						<i class="fa fa-search-minus" aria-hidden="true"><span style="font-family: Josefin Sans;font-size: 16px;">&nbsp;Font -</span></i>
+					</a>
+				</li>
+				<li>
+					<a class="btn btn-default btn-sm footerbtn settings" href="#">
+						<i class="fa fa-cog" aria-hidden="true"></i>
+					</a>
+				</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class = "col-md-3">
+	</div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script type="text/javascript">
+	var socket = io();
+	var room = "{{id}}";
+	var user = "{{user}}";
+	socket.on('updatecode',function(code){
+		editor.setValue(code);
+	});
+</script>
+<script>
+	var font_size = 15;
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/monokai");
+    editor.getSession().setMode("ace/mode/javascript");
+    document.getElementById('editor').style.fontSize = font_size + 'px';
+    editor.getSession().setUseWrapMode(true);
+    editor.setShowPrintMargin(false);	//setting the print margin visibility
+
+	$('.ace_text-input').on('keyup', function(){
+		console.log('hola');
+		console.log(editor.getValue());
+	    var msg = {
+	    	id : room,
+	    	user : user,
+	    	value : editor.getValue(),
+	    	cursor_pos : editor.getCursorPosition(),
+	    };
+	    socket.emit('document-update',msg);
+	});
+
+	socket.on('doc', function(msg){
+		if(msg.new_val.id === room && msg.new_val.user != user){
+			editor.setValue(msg.new_val.value, 1);
+			//editor.moveCursorToPosition(msg.new_val.pos);
+		}
+	});
+</script>
+
+<script type="text/javascript">
+
+	$('.switchdarkmode').on('click', function() {
+		console.log(editor.getTheme());
+	    if (editor.getTheme() == 'ace/theme/xcode') {
+	   	    editor.setTheme('ace/theme/monokai');
+	    } 
+	    else {
+	    	editor.setTheme('ace/theme/xcode');
+	    }
+	});
+
+	$('.increasefont').on('click', function(){
+		font_size++;
+		document.getElementById('editor').style.fontSize = font_size + 'px';
+	});
+
+	$('.decreasefont').on('click', function(){
+		font_size--;
+		document.getElementById('editor').style.fontSize = font_size + 'px';
+	});
+</script>
