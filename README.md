@@ -1,4 +1,4 @@
-# WhiteBoard
+# GlassBoard
 
 ## Description
 
