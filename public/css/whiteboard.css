@@ -1,9 +1,7 @@
 .left-icons{
-        display: block;
-        margin:auto;
-        width: 35%;
-        padding-top: 30%;
+        padding-top: 20%;
         padding-bottom: 8%;
+        color: rgba(255,255,255,0.7);
     }
 .logo{
     padding-bottom: 0%;
@@ -28,7 +26,7 @@ ul{
     padding: 6px 10px;
     margin-top: 5px;
 }
-.btn:hover, .btn:active, .btn:focus. a:active, a:hover, a:{
+.btn:hover, .btn:active, .btn:focus, a:active, a:hover{
     background-color: rgba(0,0,0,0.8);
     color: #336a9a;
 }
@@ -52,4 +50,7 @@ textarea{
     border: 0;
     padding: 6px;
     padding-left: 0;
+}
+#stdout{
+
 }

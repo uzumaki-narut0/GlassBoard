@@ -6,25 +6,26 @@
 				<ul style="list-style: none;">
 					<li style="background-color: #336a9a;width: 100%;">
 						<a href = "#">
-							<img class="img-responsive left-icons logo" src="/img/logo.png">
+						
+						  <i style="color: white;" class="fa fa-terminal fa-4x left-icons"></i>
 						</a>
 					</li>
 					<li style="background-color: #336a9a">Code</li>
 					<li>
 						<a href="#">
-							<img class="img-responsive left-icons" src="/img/user.png">
+							<i class="fa fa-users fa-3x left-icons" aria-hidden="true"></i>
 						</a>
 					</li>
 					<li>Invite</li>
 					<li>
 						<a href="#">
-							<img class="img-responsive left-icons" src="/img/contacts.png">
+							<i class="fa fa-code fa-3x left-icons"  aria-hidden="true"></i>
 						</a>
 					</li>
 					<li>Load Snippet</li>
 					<li>
 						<a href="#">
-							<img class="img-responsive left-icons" src="/img/repeat.png">
+							<i class="fa fa-repeat fa-3x left-icons" aria-hidden="true"></i>
 						</a>
 					</li>
 					<li>Playback</li>
@@ -38,7 +39,7 @@
 	<!--Standard Input and Standard Output Column starts-->
 	<div class="col-md-3 hidden-sm" style="background-color: rgba(0,0,0,0.9); height: 90vh">
 	<textarea placeholder="Standard Input.. Enter your custom testcase here.."></textarea>
-	<textarea placeholder="Standard Output.."></textarea>
+	<textarea readonly id="stdout" placeholder="Standard Output.."></textarea>
 	</div>
 	<!--Standard Input and Standard Output Column ends-->
 </div>
@@ -64,7 +65,7 @@
 				</li>
 				<li>
 					<a class="btn btn-default btn-sm footerbtn" href="#">
-				    <i class="fa fa-play" aria-hidden="true""><span style="font-family: Josefin Sans;font-size: 16px;">&nbsp;Run Code</span></i>
+				    <i style="color:white;" class="fa fa-play" aria-hidden="true""><span style="font-family: Josefin Sans;font-size: 16px;">&nbsp;Run Code</span></i>
 					</a>
 
 				</li>
@@ -131,7 +132,7 @@
 	socket.on('doc', function(msg){
 		if(msg.new_val.id === room && msg.new_val.user != user){
 			editor.setValue(msg.new_val.value, 1);
-			//editor.moveCursorToPosition(msg.new_val.pos);
+			editor.moveCursorToPosition(msg.new_val.pos);
 		}
 	});
 </script>
